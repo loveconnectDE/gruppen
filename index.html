@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>LoveConnect 💕 — Gruppen und Gemeinschaften</title>
+ <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+ <header>
+  <div class="container">
+   <div class="header-inner">
+    <div class="logo">LoveConnect 💕</div>
+    <div class="nav-pills">
+     <button class="pill active" data-filter="all">Alles</button>
+     <button class="pill" data-filter="wa">WhatsApp</button>
+     <button class="pill" data-filter="tg">Telegram</button>
+     <button class="pill" data-filter="Freunde">Freunde</button>
+     <button class="pill" data-filter="Dating">Dating</button>
+    </div>
+    <button class="add-group-btn" id="openAddGroup">✦ Gruppe hinzufügen</button>
+   </div>
+  </div>
+ </header>
+ <main>
+  <div class="container">
+   <section class="hero">
+    <div class="hero-sub">✦ Dating-Communities ✦</div>
+    <h1>Finde deinen<br><em>Besondere Verbindung</em></h1>
+    <p>Aktive WhatsApp und Telegram Gruppen, in denen du neue Leute kennenlernen, Freundschaften schließen und vielleicht sogar mehr daraus machen kannst.</p>
+    <div class="stats-row">
+     <div class="stat">
+      <div class="stat-num" id="totalGroups">1</div>
+      <div class="stat-label">Aktive Gruppen</div>
+     </div>
+     <div class="stat">
+      <div class="stat-num" id="statMembers">85K</div>
+      <div class="stat-label">Mitglieder</div>
+     </div>
+     <div class="stat">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Immer aktiv</div>
+     </div>
+    </div>
+   </section>
+   <section id="addGroupSection">
+    <div class="container">
+     <div class="add-group-banner">
+      <div class="agb-left">
+       <div class="agb-tag">✦ Community</div>
+       <div class="agb-title">¿haben eine aktive Gruppe?</div>
+       <div class="agb-sub">Füge deine WhatsApp- oder Telegram-Gruppe hinzu und erreiche Tausende von Menschen.</div>
+      </div>
+      <button class="agb-cta" id="openAddGroup2">+ Gruppe hinzufügen</button>
+     </div>
+    </div>
+   </section>
+   <section>
+    <div class="section-title">✦ Ausgewählte Gruppen</div>
+    <div class="filter-bar">
+     <button class="filter-btn active" data-f="all">Alles</button>
+     <button class="filter-btn" data-f="wa">WhatsApp</button>
+     <button class="filter-btn" data-f="tg">Telegram</button>
+     <button class="filter-btn" data-f="Freunde">🤝 Freunde</button>
+     <button class="filter-btn" data-f="Dating">🔞 +18 Dating</button>
+     <span class="results-count" id="resultsCount">18 Gruppen</span>
+    </div>
+    <div class="groups-grid" id="groupsGrid"></div>
+    <div class="page-info" id="pageInfo"></div>
+    <div class="pagination" id="pagination"></div>
+   </section>
+  </div>
+ </main>
+ <footer>
+  <div class="container">
+   <p><span>LoveConnect</span> — 2026 ♡ WhatsApp und Telegram Dating Communitys</p>
+  </div>
+ </footer>
+ <!-- SECCIÓN AÑADIR GRUPO -->
+ <!-- MODAL AÑADIR GRUPO -->
+ <div id="addGroupOverlay" class="ag-overlay">
+  <div class="ag-modal" role="dialog" aria-label="Gruppe hinzufügen">
+   <div class="ag-modal-header">
+    <div>
+     <div class="ag-modal-sub">✦ Community</div>
+     <div class="ag-modal-title">Gruppe hinzufügen</div>
+    </div>
+    <button class="ag-close" id="closeAddGroup" aria-label="Cerrar">✕</button>
+   </div>
+   <div class="ag-platform-row">
+    <button class="ag-plat-btn active" data-plat="wa" id="platWa">
+<span class="ag-plat-icon">💬</span>
+<span>WhatsApp</span>
+</button>
+    <button class="ag-plat-btn" data-plat="tg" id="platTg">
+<span class="ag-plat-icon">✈️</span>
+<span>Telegram</span>
+</button>
+   </div>
+   <div class="ag-form">
+    <div class="ag-field">
+     <label class="ag-label">Gruppenname *</label>
+     <input class="ag-input" id="ag-name" type="text" placeholder="z.B. Dating Deutschland 🇩🇪" maxlength="60" />
+    </div>
+    <div class="ag-field">
+     <label class="ag-label">Beschreibung *</label>
+     <textarea class="ag-input ag-textarea" id="ag-desc" placeholder="Beschreibe deine Gruppe in wenigen Worten..." maxlength="160" rows="3"></textarea>
+     <div class="ag-char-count"><span id="agDescCount">0</span>/160</div>
+    </div>
+    <div class="ag-field-row">
+     <div class="ag-field">
+      <label class="ag-label">Kategorie *</label>
+      <select class="ag-input ag-select" id="ag-cat">
+<option value="">— wählen —</option>
+<option value="Dating">🔞 +18 Dating</option>
+<option value="Freunde">🤝 Freunde</option>
+</select>
+     </div>
+     <div class="ag-field">
+      <label class="ag-label">Mitglieder (ca.)</label>
+      <input class="ag-input" id="ag-members" type="text" placeholder="z.B. 1.200" maxlength="12" />
+     </div>
+    </div>
+    <div class="ag-field">
+     <label class="ag-label">Einladungslink *</label>
+     <input class="ag-input" id="ag-link" type="url" placeholder="https://chat.whatsapp.com/... o https://t.me/..." />
+    </div>
+    <div class="ag-field">
+     <label class="ag-label">Emoji / Icon</label>
+     <div class="ag-emoji-grid" id="agEmojiGrid">
+      <button class="ag-emoji active" data-e="🇩🇪">🇩🇪</button>
+      <button class="ag-emoji" data-e="💘">💘</button>
+      <button class="ag-emoji" data-e="🔥">🔥</button>
+      <button class="ag-emoji" data-e="💬">💬</button>
+      <button class="ag-emoji" data-e="🌹">🌹</button>
+      <button class="ag-emoji" data-e="✨">✨</button>
+      <button class="ag-emoji" data-e="🎉">🎉</button>
+      <button class="ag-emoji" data-e="🌍">🌍</button>
+      <button class="ag-emoji" data-e="💎">💎</button>
+      <button class="ag-emoji" data-e="🦋">🦋</button>
+      <button class="ag-emoji" data-e="🎭">🎭</button>
+      <button class="ag-emoji" data-e="👥">👥</button>
+     </div>
+    </div>
+   </div>
+   <div class="ag-error" id="agError"></div>
+   <div class="ag-actions">
+    <button class="ag-cancel" id="agCancel">Abbrechen</button>
+    <button class="ag-submit" id="agSubmit">✦ Gruppe veröffentlichen</button>
+   </div>
+  </div>
+ </div>
+ <!-- TOAST -->
+ <div class="ag-toast" id="agToast">
+  <span>✦</span>
+  <span id="agToastMsg">Gruppe erfolgreich hinzugefügt!</span>
+ </div>
+ <!-- BURBUJA FLOTANTE -->
+ <div id="chatPulseRing"></div>
+ <button id="chatToggle" aria-label="Chat öffnen mit @Loresmitt">
+💁‍♀️
+<span id="notifBadge">1</span>
+</button>
+ <div id="chatWindow" role="dialog" aria-label="Chatten mit @Loresmitt">
+  <div class="cw-topbar">
+   <div class="cw-avatar-wrap">
+    <div class="cw-avatar">💁‍♀️</div>
+    <div class="cw-online"></div>
+   </div>
+   <div>
+    <div class="cw-name">@Loresmitt <span style="font-weight:400;font-size:12px;color:#b06af3;">( Telegram )</span></div>
+    <div class="cw-status">● jetzt online</div>
+   </div>
+   <button id="closeChat" aria-label="Cerrar chat">✕</button>
+  </div>
+  <div class="cw-messages" id="cwMessages"></div>
+  <!-- Input área -->
+  <div id="cwInputArea" style="
+border-top:1px solid var(--border);
+padding:10px 12px;
+display:flex; gap:8px; align-items:center;
+background:var(--dark3);
+">
+   <input id="cwInput" type="text" placeholder="Nachricht schreiben..." maxlength="120" style="
+flex:1; background:var(--dark); border:1px solid var(--border);
+border-radius:20px; padding:8px 14px;
+color:var(--text); font-family:'DM Sans',sans-serif; font-size:13px;
+outline:none; transition:border-color 0.2s;
+" />
+   <button id="cwSend" style="
+width:34px; height:34px; border-radius:50%; border:none;
+background:linear-gradient(135deg,var(--rose),var(--lavender));
+color:#000; font-size:16px; cursor:pointer;
+display:flex; align-items:center; justify-content:center;
+flex-shrink:0; transition:transform 0.15s;
+">➤</button>
+  </div>
+ </div>
+</body>
+
+<style>:root {
+  --rose: #ff4d8d;
+  --lavender: #b06af3;
+  --gold: #f5c842;
+  --dark: #0c0910;
+  --dark2: #13101a;
+  --dark3: #1a1526;
+  --card: #160f20;
+  --border: rgba(255,77,141,0.15);
+  --text: #d8c8e8;
+  --muted: #6b5880;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content:''; position:fixed; inset:0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(176,106,243,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(255,77,141,0.06) 0%, transparent 60%);
+  pointer-events:none; z-index:0;
+}
+.container { max-width:1080px; margin:0 auto; padding:0 20px; position:relative; z-index:1; }
+
+/* HEADER */
+header {
+  border-bottom:1px solid var(--border);
+  padding:18px 0;
+  position:sticky; top:0;
+  background:rgba(12,9,16,0.93);
+  backdrop-filter:blur(14px);
+  z-index:100;
+}
+.header-inner { display:flex; align-items:center; justify-content:space-between; text-align:center; }
+.logo {
+  font-family:'Playfair Display', serif;
+  font-size:22px; font-weight:900;
+  background:linear-gradient(135deg, var(--rose), var(--lavender));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  letter-spacing:1px;
+}
+.nav-pills { display:flex; gap:8px; flex-wrap:wrap; }
+.pill {
+  font-size:12px; padding:5px 14px;
+  border:1px solid var(--border);
+  border-radius:20px; color:var(--muted);
+  background:transparent; cursor:pointer;
+  transition:all 0.2s; font-family:'DM Mono';
+  letter-spacing:0.5px;
+}
+.pill:hover, .pill.active {
+  color:var(--rose); border-color:var(--rose);
+  background:rgba(255,77,141,0.07);
+}
+
+/* HERO */
+.hero { text-align:center; padding:60px 0 44px; }
+.hero-sub {
+  font-family:'DM Mono'; font-size:11px; color:var(--rose);
+  letter-spacing:4px; text-transform:uppercase; margin-bottom:14px;
+}
+.hero h1 {
+  font-family:'Playfair Display', serif;
+  font-size:clamp(30px,5.5vw,56px);
+  font-weight:900; color:#fff; line-height:1.15; margin-bottom:14px;
+}
+.hero h1 em { font-style:italic; color:var(--rose); }
+.hero p {
+  color:var(--muted); font-size:16px; font-weight:300;
+  max-width:480px; margin:0 auto 28px; line-height:1.65;
+}
+.stats-row { display:flex; justify-content:center; gap:48px; }
+.stat-num { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--rose); }
+.stat-label { font-size:12px; color:var(--muted); margin-top:2px; text-transform:uppercase; letter-spacing:1px; }
+
+/* Counter bounce animation */
+@keyframes countBounce {
+  0%   { transform: translateY(0) scale(1); }
+  20%  { transform: translateY(-8px) scale(1.08); }
+  40%  { transform: translateY(4px) scale(0.97); }
+  60%  { transform: translateY(-4px) scale(1.03); }
+  80%  { transform: translateY(2px) scale(0.99); }
+  100% { transform: translateY(0) scale(1); }
+}
+.stat-num.counting {
+  animation: countBounce 0.5s ease;
+  display: inline-block;
+}
+
+/* SECTION TITLE */
+.section-title {
+  font-family:'DM Mono'; font-size:11px; color:var(--lavender);
+  letter-spacing:3px; text-transform:uppercase;
+  margin-bottom:22px; display:flex; align-items:center; gap:12px;
+}
+.section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* FILTER BAR */
+.filter-bar {
+  display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap; align-items:center;
+}
+.filter-btn {
+  font-family:'DM Mono'; font-size:11px; padding:6px 16px;
+  border:1px solid var(--border); border-radius:20px;
+  color:var(--muted); background:transparent; cursor:pointer;
+  transition:all 0.2s; letter-spacing:0.5px;
+}
+.filter-btn:hover, .filter-btn.active {
+  color:var(--rose); border-color:var(--rose);
+  background:rgba(255,77,141,0.07);
+}
+.results-count {
+  margin-left:auto; font-family:'DM Mono';
+  font-size:11px; color:var(--muted);
+}
+
+/* GROUPS */
+.groups-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:16px; margin-bottom:32px;
+}
+.group-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px; padding:20px;
+  position:relative; overflow:hidden;
+  transition:border-color 0.3s, transform 0.2s;
+  animation:cardIn 0.35s ease;
+}
+@keyframes cardIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+.group-card:hover { border-color:rgba(255,77,141,0.4); transform:translateY(-2px); }
+.card-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:12px; }
+.card-icon {
+  width:46px; height:46px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; background:rgba(255,77,141,0.08);
+  border:1px solid rgba(255,77,141,0.15); flex-shrink:0;
+}
+.plat-badge {
+  font-family:'DM Mono'; font-size:10px; padding:3px 9px;
+  border-radius:20px; letter-spacing:0.5px; text-transform:uppercase;
+}
+.badge-wa { background:rgba(37,211,102,0.1); color:#25d366; border:1px solid rgba(37,211,102,0.25); }
+.badge-tg { background:rgba(38,160,218,0.1); color:#26a0da; border:1px solid rgba(38,160,218,0.25); }
+.card-name { font-family:'Inter',sans-serif; font-size:15px; font-weight:800; color:#ffffff; margin:8px 0 5px; letter-spacing:-0.3px; }
+.card-desc { font-family:'Inter',sans-serif; font-size:13px; font-weight:500; color:#9b87b0; line-height:1.6; margin-bottom:14px; }
+.card-footer { display:flex; align-items:center; justify-content:space-between; }
+.members { font-family:'Inter',sans-serif; font-size:11px; font-weight:600; color:var(--muted); letter-spacing:0.2px; }
+.members span { font-weight:600; }
+.card-wa .members span { color:#25d366; }
+.card-tg .members span { color:#26a0da; }
+.join-btn {
+  font-size:12px; padding:6px 16px; border-radius:20px;
+  cursor:pointer; font-weight:500; transition:all 0.2s;
+  text-decoration:none; display:inline-block;
+  font-family:'Inter',sans-serif; font-weight:700;
+  border:1px solid #25d366; color:#25d366; background:transparent;
+}
+.join-btn:hover { background:#25d366; color:#fff; }
+.join-btn.tg { border-color:#26a0da; color:#26a0da; }
+.join-btn.tg:hover { background:#26a0da; color:#fff; }
+.special-badge {
+  position:absolute; top:12px; right:12px;
+  font-family:'DM Mono'; font-size:9px;
+  color:var(--gold); border:1px solid rgba(245,200,66,0.4);
+  padding:2px 7px; border-radius:20px; letter-spacing:1px;
+}
+
+/* PAGINATION */
+.pagination {
+  display:flex; align-items:center; justify-content:center;
+  gap:8px; margin-bottom:80px; flex-wrap:wrap;
+}
+.page-btn {
+  font-family:'DM Mono'; font-size:13px;
+  width:40px; height:40px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--border); background:transparent;
+  color:var(--muted); cursor:pointer; transition:all 0.2s;
+}
+.page-btn:hover { border-color:var(--rose); color:var(--rose); background:rgba(255,77,141,0.07); }
+.page-btn.active { background:var(--rose); border-color:var(--rose); color:#fff; font-weight:700; }
+.page-btn.arrow { font-size:16px; }
+.page-btn:disabled { opacity:0.3; cursor:not-allowed; }
+.page-info {
+  font-family:'DM Mono'; font-size:11px; color:var(--muted);
+  text-align:center; margin-bottom:16px;
+}
+
+/* PULSE RING */
+#chatPulseRing {
+  position:fixed; bottom:28px; right:28px;
+  width:62px; height:62px; border-radius:50%;
+  z-index:999; pointer-events:none;
+}
+#chatPulseRing::before,
+#chatPulseRing::after {
+  content:'';
+  position:absolute; inset:-6px;
+  border-radius:50%;
+  border:2px solid rgba(255,77,141,0.6);
+  animation: ringExpand 2s ease-out infinite;
+}
+#chatPulseRing::after {
+  inset:-2px;
+  border-color:rgba(176,106,243,0.5);
+  animation-delay:0.8s;
+}
+@keyframes ringExpand {
+  0%   { transform:scale(1);   opacity:0.8; }
+  100% { transform:scale(1.7); opacity:0;   }
+}
+
+/* FLOATING CHAT */
+#chatToggle {
+  position:fixed; bottom:28px; right:28px;
+  width:62px; height:62px; border-radius:50%;
+  background:linear-gradient(135deg,var(--rose),var(--lavender));
+  border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:26px;
+  box-shadow:0 4px 24px rgba(255,77,141,0.45);
+  z-index:1000;
+  animation: bubbleFloat 3s ease-in-out infinite, bubbleGlow 2s ease-in-out infinite alternate;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+@keyframes bubbleFloat {
+  0%,100% { transform: translateY(0) scale(1); }
+  30%      { transform: translateY(-8px) scale(1.05); }
+  60%      { transform: translateY(-4px) scale(1.02); }
+}
+@keyframes bubbleGlow {
+  0%   { box-shadow: 0 4px 24px rgba(255,77,141,0.5), 0 0 0 0 rgba(255,77,141,0.4); }
+  100% { box-shadow: 0 8px 40px rgba(176,106,243,0.7), 0 0 0 12px rgba(255,77,141,0); }
+}
+#chatToggle:hover {
+  animation: none;
+  transform: scale(1.15) translateY(-4px);
+  box-shadow: 0 10px 40px rgba(255,77,141,0.7);
+}
+#notifBadge {
+  position:absolute; top:-6px; right:-6px;
+  width:20px; height:20px; border-radius:50%;
+  background: linear-gradient(135deg, #f5c842, #ffd700);
+  color:#000; font-size:11px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Inter',sans-serif;
+  border:2px solid var(--dark);
+  box-shadow: 0 0 0 0 rgba(245,200,66,0.7);
+  animation: notifBounce 0.8s cubic-bezier(0.36,0.07,0.19,0.97) infinite,
+             notifRing 1.5s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes notifBounce {
+  0%,100% { transform: translateY(0) scale(1); }
+  20%     { transform: translateY(-8px) scale(1.15); }
+  40%     { transform: translateY(0px) scale(0.95); }
+  60%     { transform: translateY(-4px) scale(1.07); }
+  80%     { transform: translateY(0px) scale(0.98); }
+}
+@keyframes notifRing {
+  0%   { box-shadow: 0 0 0 0 rgba(245,200,66,0.7); }
+  50%  { box-shadow: 0 0 0 8px rgba(245,200,66,0); }
+  100% { box-shadow: 0 0 0 0 rgba(245,200,66,0); }
+}
+
+#chatWindow {
+  position:fixed; bottom:104px; right:28px;
+  width:330px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px; overflow:hidden;
+  box-shadow:0 8px 48px rgba(0,0,0,0.6), 0 0 60px rgba(255,77,141,0.08);
+  z-index:999;
+  transform:scale(0.85) translateY(20px);
+  transform-origin:bottom right;
+  opacity:0; pointer-events:none;
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease;
+}
+#chatWindow.open { transform:scale(1) translateY(0); opacity:1; pointer-events:all; }
+
+.cw-topbar {
+  background:var(--dark3); border-bottom:1px solid var(--border);
+  padding:12px 16px; display:flex; align-items:center; gap:10px;
+}
+.cw-avatar-wrap { position:relative; }
+.cw-avatar {
+  width:38px; height:38px; border-radius:50%;
+  background:linear-gradient(135deg,#ff4d8d,#b06af3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; border:2px solid rgba(255,77,141,0.3);
+}
+.cw-online {
+  position:absolute; bottom:1px; right:1px;
+  width:9px; height:9px; border-radius:50%;
+  background:#25d366; border:2px solid var(--dark3);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+.cw-name { font-family:'Inter',sans-serif; font-size:14px; font-weight:800; color:#ffffff; letter-spacing:-0.2px; }
+.cw-status { font-size:11px; color:#25d366; margin-top:1px; }
+#closeChat {
+  margin-left:auto; background:transparent; border:none;
+  color:var(--muted); font-size:18px; cursor:pointer;
+  padding:2px 4px; transition:color 0.2s;
+}
+#closeChat:hover { color:var(--rose); }
+
+.cw-messages {
+  padding:16px; min-height:200px; max-height:260px;
+  overflow-y:auto; display:flex; flex-direction:column; gap:12px;
+  scroll-behavior:smooth;
+}
+.cw-messages::-webkit-scrollbar{width:3px;}
+.cw-messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.cw-msg { display:flex; gap:8px; align-items:flex-end; animation:fadeUp 0.3s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:translateY(0);} }
+.cw-m-avatar {
+  width:28px; height:28px; border-radius:50%;
+  background:linear-gradient(135deg,#ff4d8d,#b06af3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; flex-shrink:0;
+}
+.cw-bubble {
+  max-width:82%; padding:9px 13px;
+  background:var(--dark3); border:1px solid var(--border);
+  border-radius:4px 14px 14px 14px;
+  font-size:13px; line-height:1.55; color:var(--text);
+}
+.cw-link {
+  display:inline-flex; align-items:center; gap:5px;
+  margin-top:8px; padding:7px 14px;
+  background:linear-gradient(135deg,rgba(255,77,141,0.15),rgba(176,106,243,0.15));
+  border:1px solid rgba(255,77,141,0.4); border-radius:20px;
+  color:var(--rose); font-size:12px; text-decoration:none;
+  font-weight:500; transition:all 0.2s; cursor:pointer; white-space:nowrap;
+}
+.cw-link:hover { background:linear-gradient(135deg,rgba(255,77,141,0.28),rgba(176,106,243,0.28)); color:#fff; }
+.typing-wrap { display:flex; gap:8px; align-items:flex-end; }
+.typing-box {
+  background:var(--dark3); border:1px solid var(--border);
+  border-radius:4px 14px 14px 14px;
+  padding:10px 14px; display:flex; gap:4px; align-items:center;
+}
+.t-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--rose); opacity:0.5; animation:typing 1.3s infinite;
+}
+.t-dot:nth-child(2){animation-delay:0.2s;}
+.t-dot:nth-child(3){animation-delay:0.4s;}
+@keyframes typing { 0%,60%,100%{transform:translateY(0);opacity:0.4;} 30%{transform:translateY(-5px);opacity:1;} }
+
+footer {
+  border-top:1px solid var(--border); padding:28px 0;
+  text-align:center; font-family:'DM Mono'; font-size:12px;
+  color:var(--muted); letter-spacing:1px; margin-bottom:20px;
+}
+footer span { color:var(--rose); }
+
+@media(max-width:600px){
+  .stats-row{gap:22px;}
+  .nav-pills{display:none;}
+  .groups-grid{grid-template-columns:1fr;}
+  #chatWindow{width:calc(100vw - 32px); right:16px; bottom:100px;}
+  #chatToggle{bottom:20px; right:16px;}
+}
+/* ── HEADER ADD BUTTON ── */
+.add-group-btn {
+  font-family:'DM Mono'; font-size:11px; padding:7px 16px;
+  border-radius:20px; letter-spacing:0.5px;
+  background:linear-gradient(135deg,var(--rose),var(--lavender));
+  color:#fff; border:none; cursor:pointer;
+  font-weight:600; white-space:nowrap;
+  transition:opacity 0.2s, transform 0.2s;
+  flex-shrink:0; text-align:center;
+}
+.add-group-btn:hover { opacity:0.88; transform:translateY(-1px); }
+
+/* ── ADD GROUP BANNER ── */
+#addGroupSection {
+  padding: 0 0 32px;
+}
+.add-group-banner {
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  gap:20px; flex-wrap:wrap; text-align:center;
+  background: linear-gradient(135deg, rgba(255,77,141,0.1), rgba(176,106,243,0.1));
+  border:1px solid rgba(255,77,141,0.3);
+  border-radius:16px; padding:24px 28px;
+  position:relative; overflow:hidden;
+}
+.add-group-banner::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse at 0% 50%, rgba(255,77,141,0.07) 0%, transparent 60%),
+              radial-gradient(ellipse at 100% 50%, rgba(176,106,243,0.07) 0%, transparent 60%);
+  pointer-events:none;
+}
+.agb-left { display:flex; flex-direction:column; gap:5px; align-items:center; text-align:center; }
+.agb-icon { display:none; }
+.agb-title {
+  font-family:'Inter',sans-serif; font-size:17px;
+  font-weight:800; color:#ffffff; letter-spacing:-0.3px;
+}
+.agb-tag {
+  font-family:'DM Mono'; font-size:10px; color:var(--rose);
+  letter-spacing:3px; text-transform:uppercase;
+}
+.agb-sub { font-size:13px; color:var(--muted); line-height:1.5; max-width:420px; text-align:center; }
+.agb-cta {
+  display:inline-flex; align-items:center; justify-content:center; gap:6px; text-align:center;
+  font-family:'DM Mono'; font-size:12px; padding:11px 26px;
+  border-radius:24px; letter-spacing:0.5px; white-space:nowrap;
+  background:linear-gradient(135deg,var(--rose),var(--lavender));
+  color:#fff; border:none; cursor:pointer; font-weight:600;
+  box-shadow:0 4px 20px rgba(255,77,141,0.35);
+  transition:opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  flex-shrink:0;
+}
+.agb-cta:hover {
+  opacity:0.9; transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(255,77,141,0.45);
+}
+
+/* ── MODAL OVERLAY ── */
+.ag-overlay {
+  position:fixed; inset:0;
+  background:rgba(12,9,16,0.85);
+  backdrop-filter:blur(8px);
+  z-index:2000;
+  display:flex; align-items:center; justify-content:center;
+  padding:20px;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.25s ease;
+}
+.ag-overlay.open { opacity:1; pointer-events:all; }
+
+.ag-modal {
+  background:var(--dark2);
+  border:1px solid rgba(255,77,141,0.25);
+  border-radius:20px;
+  width:100%; max-width:500px;
+  max-height:90vh; overflow-y:auto;
+  padding:28px;
+  box-shadow:0 20px 80px rgba(0,0,0,0.7), 0 0 60px rgba(255,77,141,0.08);
+  transform:translateY(20px) scale(0.96);
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.ag-overlay.open .ag-modal { transform:translateY(0) scale(1); }
+.ag-modal::-webkit-scrollbar{width:3px;}
+.ag-modal::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+
+.ag-modal-header {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  margin-bottom:22px;
+}
+.ag-modal-sub {
+  font-family:'DM Mono'; font-size:10px; color:var(--rose);
+  letter-spacing:3px; text-transform:uppercase; margin-bottom:6px;
+}
+.ag-modal-title {
+  font-family:'Playfair Display',serif; font-size:22px;
+  font-weight:900; color:#f0e0ff;
+}
+.ag-close {
+  background:transparent; border:none; color:var(--muted);
+  font-size:18px; cursor:pointer; padding:4px;
+  transition:color 0.2s; line-height:1; margin-top:2px;
+}
+.ag-close:hover { color:var(--rose); }
+
+/* Platform selector */
+.ag-platform-row {
+  display:flex; gap:10px; margin-bottom:22px;
+}
+.ag-plat-btn {
+  flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+  padding:10px 16px; border-radius:12px;
+  border:1px solid var(--border);
+  background:transparent; color:var(--muted);
+  font-family:'DM Mono'; font-size:12px; cursor:pointer;
+  transition:all 0.2s; letter-spacing:0.5px;
+}
+.ag-plat-btn .ag-plat-icon { font-size:16px; }
+.ag-plat-btn:hover { border-color:var(--rose); color:var(--text); }
+.ag-plat-btn.active {
+  border-color:var(--rose); color:var(--rose);
+  background:rgba(255,77,141,0.08);
+}
+.ag-plat-btn[data-plat="tg"].active {
+  border-color:#26a0da; color:#26a0da;
+  background:rgba(38,160,218,0.08);
+}
+
+/* Form */
+.ag-form { display:flex; flex-direction:column; gap:16px; }
+.ag-field { display:flex; flex-direction:column; gap:6px; }
+.ag-field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.ag-label {
+  font-family:'DM Mono'; font-size:10px; color:var(--muted);
+  letter-spacing:1px; text-transform:uppercase;
+}
+.ag-input {
+  background:var(--dark3); border:1px solid var(--border);
+  border-radius:10px; padding:10px 14px;
+  color:var(--text); font-family:'DM Sans',sans-serif; font-size:13px;
+  outline:none; transition:border-color 0.2s; width:100%;
+  appearance:none; -webkit-appearance:none;
+}
+.ag-input:focus { border-color:var(--rose); }
+.ag-input::placeholder { color:var(--muted); }
+.ag-textarea { resize:vertical; min-height:72px; }
+.ag-select { cursor:pointer; }
+.ag-select option { background:var(--dark2); }
+.ag-char-count {
+  font-family:'DM Mono'; font-size:10px; color:var(--muted);
+  text-align:right; margin-top:2px;
+}
+
+/* Emoji grid */
+.ag-emoji-grid {
+  display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;
+}
+.ag-emoji {
+  width:38px; height:38px; border-radius:8px;
+  border:1px solid var(--border); background:var(--dark3);
+  font-size:18px; cursor:pointer; transition:all 0.15s;
+  display:flex; align-items:center; justify-content:center;
+}
+.ag-emoji:hover { border-color:rgba(255,77,141,0.4); transform:scale(1.1); }
+.ag-emoji.active {
+  border-color:var(--rose); background:rgba(255,77,141,0.12);
+  box-shadow:0 0 12px rgba(255,77,141,0.2);
+}
+
+/* Error */
+.ag-error {
+  font-family:'DM Mono'; font-size:11px; color:#ff6b6b;
+  letter-spacing:0.5px; min-height:16px; display:none;
+}
+.ag-error.show { display:block; }
+
+/* Actions */
+.ag-actions {
+  display:flex; gap:10px; margin-top:22px;
+}
+.ag-cancel {
+  flex:1; padding:11px; border-radius:12px;
+  border:1px solid var(--border); background:transparent;
+  color:var(--muted); font-family:'DM Mono'; font-size:12px;
+  cursor:pointer; letter-spacing:0.5px; transition:all 0.2s;
+}
+.ag-cancel:hover { border-color:var(--muted); color:var(--text); }
+.ag-submit {
+  flex:2; padding:11px 20px; border-radius:12px; border:none;
+  background:linear-gradient(135deg,var(--rose),var(--lavender));
+  color:#fff; font-family:'DM Mono'; font-size:12px;
+  cursor:pointer; font-weight:600; letter-spacing:0.5px;
+  transition:opacity 0.2s, transform 0.15s;
+  box-shadow:0 4px 20px rgba(255,77,141,0.3);
+}
+.ag-submit:hover { opacity:0.9; transform:translateY(-1px); }
+.ag-submit:active { transform:translateY(0); }
+.ag-submit:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+
+/* Toast */
+.ag-toast {
+  position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(80px);
+  background:linear-gradient(135deg,rgba(255,77,141,0.15),rgba(176,106,243,0.15));
+  border:1px solid rgba(255,77,141,0.4);
+  backdrop-filter:blur(12px);
+  color:var(--text); font-family:'DM Mono'; font-size:12px;
+  padding:12px 24px; border-radius:30px;
+  display:flex; align-items:center; gap:10px;
+  z-index:3000; letter-spacing:0.5px;
+  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease;
+  opacity:0; pointer-events:none;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.ag-toast.show {
+  transform:translateX(-50%) translateY(0);
+  opacity:1;
+}
+
+@media(max-width:600px){
+  .add-group-btn { display:none; }
+  .ag-field-row { grid-template-columns:1fr; }
+  .ag-modal { padding:20px; }
+  .agb-cta { width:100%; text-align:center; }
+  .add-group-banner { flex-direction:column; }
+}
+
+
+/* ── ADD GROUP BANNER ANIMATIONS ── */
+@keyframes agbSlideIn {
+  from { opacity:0; transform:translateY(18px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes agbBorderGlow {
+  0%,100% { border-color: rgba(255,77,141,0.15); box-shadow: 0 0 0px rgba(255,77,141,0); }
+  50%     { border-color: rgba(176,106,243,0.55); box-shadow: 0 0 28px rgba(176,106,243,0.13); }
+}
+@keyframes agbShimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes agbCtaPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(255,77,141,0.3); }
+  50%     { box-shadow: 0 4px 36px rgba(255,77,141,0.6), 0 0 0 6px rgba(255,77,141,0.07); }
+}
+@keyframes agbTitleGlow {
+  0%,100% { text-shadow: none; }
+  50%     { text-shadow: 0 0 20px rgba(255,77,141,0.25); }
+}
+
+#addGroupSection { animation: agbSlideIn 0.65s ease both; }
+
+.add-group-banner {
+  animation: agbBorderGlow 3.5s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.add-group-banner:hover { transform: translateY(-3px); }
+
+/* Shimmer sweep */
+.add-group-banner::after {
+  content:'';
+  position:absolute; inset:0; border-radius:16px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.04) 40%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 60%,
+    transparent 100%);
+  background-size:800px 100%;
+  animation: agbShimmer 3.2s linear infinite;
+  pointer-events:none;
+}
+
+.agb-title { animation: agbTitleGlow 3s ease-in-out infinite; }
+
+.agb-cta {
+  animation: agbCtaPulse 2s ease-in-out infinite;
+  position: relative; overflow: hidden;
+}
+.agb-cta::after {
+  content:'';
+  position:absolute; top:0; left:-100%;
+  width:60%; height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);
+  transition: left 0.4s ease;
+}
+.agb-cta:hover::after { left:160%; }
+.agb-cta:hover { animation: none; }
+
+/* Floating sparkles for add-group banner */
+.add-group-banner .spark {
+  position:absolute; font-size:13px; pointer-events:none; user-select:none;
+  animation: floatParticle var(--dur,3s) ease-in-out infinite;
+  animation-delay: var(--del,0s);
+  opacity:0.35;
+}
+/* ── BADGE ANIMATIONS ── */
+@keyframes firePulse {
+  0%,100% { box-shadow: 0 0 4px rgba(255,100,0,0.4); border-color:rgba(255,100,0,0.5); color:#ff6400; }
+  50%     { box-shadow: 0 0 12px rgba(255,100,0,0.8), 0 0 20px rgba(255,60,0,0.3); border-color:rgba(255,80,0,0.9); color:#ff3c00; }
+}
+@keyframes fireShake {
+  0%,100% { transform: rotate(0deg) scale(1); }
+  25%     { transform: rotate(-8deg) scale(1.15); }
+  75%     { transform: rotate(8deg) scale(1.15); }
+}
+@keyframes topGlow {
+  0%,100% { box-shadow: 0 0 4px rgba(245,200,66,0.3); border-color:rgba(245,200,66,0.4); }
+  50%     { box-shadow: 0 0 14px rgba(245,200,66,0.8), 0 0 24px rgba(245,200,66,0.2); border-color:rgba(245,200,66,0.9); }
+}
+@keyframes topBounce {
+  0%,100% { transform: translateY(0) scale(1); }
+  40%     { transform: translateY(-4px) scale(1.08); }
+  70%     { transform: translateY(1px) scale(0.97); }
+}
+@keyframes newSpin {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(15deg) scale(1.2); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+@keyframes newShimmer {
+  0%,100% { box-shadow: 0 0 4px rgba(176,106,243,0.3); border-color:rgba(176,106,243,0.4); color:#b06af3; }
+  50%     { box-shadow: 0 0 14px rgba(176,106,243,0.8), 0 0 22px rgba(176,106,243,0.25); border-color:rgba(176,106,243,0.9); color:#d48fff; }
+}
+
+/* HOT badge — fuego */
+.badge-hot {
+  animation: firePulse 1.6s ease-in-out infinite;
+  color: #ff6400 !important;
+  border-color: rgba(255,100,0,0.5) !important;
+}
+.badge-hot .badge-icon {
+  display:inline-block;
+  animation: fireShake 1.2s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* TOP badge — brillo dorado */
+.badge-top {
+  animation: topGlow 2s ease-in-out infinite, topBounce 2s ease-in-out infinite;
+  color: var(--gold) !important;
+}
+.badge-top .badge-icon {
+  display:inline-block;
+  animation: topBounce 1.8s ease-in-out infinite;
+}
+
+/* NEW badge — destellos morados */
+.badge-new {
+  animation: newShimmer 2.2s ease-in-out infinite;
+  color: #b06af3 !important;
+  border-color: rgba(176,106,243,0.4) !important;
+}
+.badge-new .badge-icon {
+  display:inline-block;
+  animation: newSpin 2.5s ease-in-out infinite;
+}
+
+
+/* ── NEON BORDER ANIMATIONS ── */
+@keyframes neonWa {
+  0%,100% {
+    border-color: rgba(37,211,102,0.15);
+    box-shadow: 0 0 3px rgba(37,211,102,0.1);
+  }
+  50% {
+    border-color: rgba(37,211,102,0.55);
+    box-shadow: 0 0 8px rgba(37,211,102,0.35), 0 0 18px rgba(37,211,102,0.12);
+  }
+}
+@keyframes neonTg {
+  0%,100% {
+    border-color: rgba(38,160,218,0.15);
+    box-shadow: 0 0 3px rgba(38,160,218,0.1);
+  }
+  50% {
+    border-color: rgba(38,160,218,0.55);
+    box-shadow: 0 0 8px rgba(38,160,218,0.35), 0 0 18px rgba(38,160,218,0.12);
+  }
+}
+
+.group-card.card-wa {
+  animation: cardIn 0.35s ease, neonWa 2.5s ease-in-out infinite;
+  border-color: rgba(37,211,102,0.3);
+}
+.group-card.card-wa:hover {
+  animation: neonWa 1.2s ease-in-out infinite;
+  transform: translateY(-2px);
+}
+
+.group-card.card-tg {
+  animation: cardIn 0.35s ease, neonTg 2.5s ease-in-out infinite;
+  border-color: rgba(38,160,218,0.3);
+}
+.group-card.card-tg:hover {
+  animation: neonTg 1.2s ease-in-out infinite;
+  transform: translateY(-2px);
+}
+
+</style><script>/* ── DATA ── */
+const allGroups = [
+  { icon:'🇩🇪', name:'Nudes nudes free 🔥18+', desc:'Die größte deutschsprachige Dating-Gruppe. Menschen aus ganz Europa suchen nach kostenlosem Chat und Sex.', plat:'wa', cat:'Dating', members:'4,200', badge:'⭐ TOP', link:'https://chat.whatsapp.com/LPbHTT42YCdHEPQ1kjhFC9?mode=gi_t' },
+  { icon:'🇩🇪', name:'NUDES GRUPPE🔥', desc:'Looking for fun? 🇩🇪🇦🇹🇨🇭 Finde Singles in deiner Nähe. Komplett kostenloser Chat und diskrete Treffen.', plat:'tg', cat:'Freunde', members:'6,750', badge:'⭐ TOP', link:'https://t.me/+xuYYA6jDidZlMTFh' },
+  { icon:'🇩🇪', name:'NUDEES🥵💦🔥', desc:'Keine Verpflichtungen, nur Spaß. 💘 Trete der größten Dating-Community in Europa bei. Kostenlos chatten y abgelenkt werden.', plat:'wa', cat:'Dating', members:'1,980', badge:'🔥 HOT', link:'https://chat.whatsapp.com/DVrYeV6V7hTFth49Ibkr3b' },
+  { icon:'🇩🇪', name:'GRUPPE PREMIUM VIP 🇩🇪🔥', desc:'Bist du bereit? 🔞 Die heißeste deutschsprachige Gruppe ist online. Chatten, flirten, treffen – alles kostenlos.', plat:'wa', cat:'Dating', members:'3,100', badge:'🔥 HOT', link:'https://chat.whatsapp.com/GClpgEH7Nm0Dw9R0iFt1yz' },
+  { icon:'🇩🇪', name:'Gruppen skype geeil🥵', desc:'🔥 Suchen, chatten, treffen. Ganz Europa in einer Gruppe. Kostenloser Chat & unverbindlicher Sex.', plat:'wa', cat:'Freunde', members:'8,400', badge:'🔥 HOT', link:'https://chat.whatsapp.com/CzFuH42DlSIGfEWukWruS4' },
+  { icon:'🇩🇪', name:'Gruppe§e%🔥', desc:'Deine Stadt, deine Regeln. 📍 Finde Singles aus dem deutschsprachigen Raum für schnelle, kostenlose Chats und diskreten Spaß.', plat:'tg', cat:'Dating', members:'2,340', badge:'✨ NEW', link:'https://t.me/+8uCVLthJYwo4YjRh' },
+  { icon:'🇩🇪', name:'German gruppe 2025🔥', desc:'Pssst... Hast du das schon gesehen? 🤫 Die größte Dating-Gruppe für Singles aus ganz Europa ist jetzt offen. Kostenloser Chat & unkomplizierter Spaß.', plat:'wa', cat:'Dating', members:'5,600', badge:'🔥 HOT', link:'https://chat.whatsapp.com/CVaXZm8Rh1XFgtMW8RqL9i?mode=gi_t' },
+  { icon:'🇩🇪', name:'DropBox Verkauf🔥', desc:'geheimtipp für singles! 🗺️ tausende menschen aus ganz europa suchen genau das gleiche wie du: Kostenloser Chat und leidenschaftliche Treffen.', plat:'tg', cat:'Freunde', members:'9,100', badge:'⭐ TOP', link:'https://t.me/+c7fhwFdIPVoyNTEx' },
+  { icon:'🇩🇪', name:'Deutschland🇩🇪🔥', desc:'Nur für Erwachsene. 🔞 Zutritt zur größten deutschsprachigen Community. Keine Fake-Profile, nur echte Chats und Treffen.', plat:'wa', cat:'Freunde', members:'2,800', badge:'🔥 HOT', link:'https://chat.whatsapp.com/Cdwr7GBqUhg3lWrxq1rTuH?mode=gi_t' },
+  { icon:'🇩🇪', name:'GRUPPE PREMIUM 🇩🇪🔥', desc:'Warum alleine bleiben? 😏 Entdecke die aktivste Dating-Gruppe in Europa. Kostenlos anmelden, direkt chatten und Spaß haben.', plat:'tg', cat:'Freunde', members:'4,500', badge:'✨ NEW', link:'https://t.me/+YzTMYLR8cH1jZjVh' },
+  { icon:'🇩🇪', name:'Nudes , bilder videos kostenlos🔥🔥', desc:'Die Gruppe ist heiß gelaufen! 🔥 Singles aus Deutschland, Österreich und der Schweiz suchen kostenlose Chats und mehr. ', plat:'wa', cat:'Freunde', members:'3,300', badge:'🔥 HOT', link:'https://chat.whatsapp.com/FSH7mbLbMia8WWI6LNny2m' },
+  { icon:'🇩🇪', name:'🔥Geile reife Frauen🔥 +45', desc:'Suchst du ein Abenteuer? 🌍 Menschen aus ganz Europa treffen sich hier. Kostenloser Chat, diskret und direkt. ', plat:'tg', cat:'Dating', members:'7,200', badge:'🔥 HOT', link:'https://t.me/nurreif40' },
+  { icon:'🇩🇪', name:'BOT INSTAGRAM 1000 Follower 🔥🇩🇪', desc:'🔥 Größte Dating-Gruppe Europas! Kostenloser Chat & Sex.', plat:'wa', cat:'Freunde', members:'1,650', badge:'⭐ TOP', link:'https://chat.whatsapp.com/EMbf4x54SI9FZkcVlkikzl?mode=gi_t' },
+  { icon:'🇩🇪', name:'TreffenSEX🔥🇩🇪🇩🇪', desc:'💘 Singles in deiner Nähe suchen dich! 100% kostenloser Chat.', plat:'wa', cat:'Dating', members:'2,900', badge:'✨ NEW', link:'https://chat.whatsapp.com/COlmQQ9XswrD0L8tMlxjfA' },
+  { icon:'🇩🇪', name:'GruppenCHAT/TLG🔥', desc:'🔞 Diskret, kostenlos & direkt. Die beste deutschsprachige Community für schnellen Spaß.', plat:'wa', cat:'Dating', members:'6,100', badge:'⭐ TOP', link:'https://chat.whatsapp.com/IviBCTtGngaLyKH24nyo3e?mode=gi_t' },
+  { icon:'🇩🇪', name:'SNAPCHATS🇩🇪🇦🇹🇨🇭🔥', desc:'💬 Chatten, flirten, Spaß haben. Ganz Europa in einer App.', plat:'wa', cat:'Freunde', members:'3,750', badge:'🔥 HOT', link:'https://chat.whatsapp.com/CSNc9dfNeYX6x6BJzPjfzK' },
+  { icon:'🇩🇪', name:'NUR TELEGRAM🇩🇪💦', desc:'🔥 Lust auf ein Abenteuer? Tritt der größten Dating-Gruppe bei.', plat:'wa', cat:'Freunde', members:'2,200', badge:'🔥 HOT', link:'https://chat.whatsapp.com/HbwedM5jKwpKbedtGj4Zc9' },
+  { icon:'🇩🇪', name:'NUDES NUDES FREEE🔥🔥🇩🇪', desc:'⚡ Chat & Sex – 100% Kostenlos. Entdecke Singles aus ganz Europa im größten deutschsprachigen Netzwerk.', plat:'wa', cat:'Dating', members:'5,400', badge:'🔥 HOT', link:'https://chat.whatsapp.com/HG141FVRjvZ0YFA2D5SprC?mode=gi_t' },
+
+  { icon:'🇦🇹', name:'NUDES/DE🇩🇪🇦🇹🇨🇭🔥', desc:'Finde deinen Match in Wien! Aktive Community für Singles aus Österreich. Kostenlos & diskret.', plat:'wa', cat:'Dating', members:'3,800', badge:'🔥 HOT', link:'https://chat.whatsapp.com/CllOfO20Fv8D3GmhPJCgH6' },
+  { icon:'🇨🇭', name:'ONLYGIRLS🇩🇪🇦🇹🇨🇭🔥💦', desc:'Die aktivste Dating-Gruppe der Schweiz. Echte Menschen, echte Treffen. Jetzt beitreten!', plat:'wa', cat:'Freunde', members:'5,200', badge:'⭐ TOP', link:'https://chat.whatsapp.com/DN3nEiPy93FKlevMjGRKpR' },
+  { icon:'🇩🇪', name:'Hot Mania 2026🔥', desc:'Berlin trifft sich hier! 💘 Tausende Singles aus der Hauptstadt suchen Dates und Freundschaften.', plat:'tg', cat:'Dating', members:'7,600', badge:'⭐ TOP', link:'https://t.me/+Sub6WgnEpG04ZDYx' },
+  { icon:'🇩🇪', name:'GRUPPENGEIL🇩🇪🇦🇹🇨🇭🔥', desc:'Der heißeste Treffpunkt für Singles aus Hamburg. Chatten, flirten und mehr. Kostenlos!', plat:'wa', cat:'Dating', members:'4,100', badge:'🔥 HOT', link:'https://chat.whatsapp.com/BjhNjSvnuyKHEB9WXdeOJ2' },
+  { icon:'🇩🇪', name:'Telegram chat geil 🇩🇪🔥', desc:'Singles aus München und Bayern – hier findet ihr euch! Diskret, aktiv und kostenlos.', plat:'wa', cat:'Freunde', members:'6,300', badge:'✨ NEW', link:'https://chat.whatsapp.com/LocNHNlPgXKBcyGBSEIrwg' },
+  { icon:'🇩🇪', name:'Geiler Chat per Telegram 🔥🇩🇪🔥', desc:'Ganz Europa in einer Gruppe! 🌍 Lerne Menschen aus verschiedenen Ländern kennen.', plat:'wa', cat:'Dating', members:'11,400', badge:'⭐ TOP', link:'https://chat.whatsapp.com/IWgPJH8vALL6UDdCmQj7wv' },
+  { icon:'🇩🇪', name:'TELEGRAM CHATHOT🔥', desc:'NRW größte Dating-Community! Singles aus Köln, Düsseldorf, Dortmund und mehr.', plat:'wa', cat:'Dating', members:'5,900', badge:'🔥 HOT', link:'https://chat.whatsapp.com/Iv3mO9myiYxAuTtxZvKV0c' },
+  { icon:'🇩🇪', name:'Private Chatgruppe🇩🇪🔥', desc:'Singles aus Frankfurt und Hessen. Aktiv, diskret, kostenlos. Dein Match wartet hier!', plat:'wa', cat:'Freunde', members:'3,450', badge:'✨ NEW', link:'https://chat.whatsapp.com/KCtkasR7P7q6FcpMRM7Qyl' },
+  { icon:'🇩🇪', name:'CHAT,TREFFEN/TLG🇩🇪🇦🇹🇨🇭🔥', desc:'Baden-Württembergs größte Dating-Gruppe. Kostenloser Chat für alle Singles.', plat:'wa', cat:'Dating', members:'2,700', badge:'🔥 HOT', link:'https://chat.whatsapp.com/LcLQHKgCmO87WliDQtvUGA' },
+  { icon:'🇩🇪', name:'Signal Gruppe 🇩🇪🥵🔥', desc:'Sachsens heißeste Dating-Community! Treffe Singles aus Dresden und Umgebung.', plat:'wa', cat:'Dating', members:'1,850', badge:'✨ NEW', link:'https://chat.whatsapp.com/CVt4ybb0VawJQ0jm6x3z8M' },
+  { icon:'🇩🇪', name:'Singles 🇩🇪🇦🇹🇨🇭🥵', desc:'💘 Singles aus Düsseldorf – hier ist dein Treffpunkt! Aktiv & kostenlos.', plat:'wa', cat:'Freunde', members:'4,600', badge:'🔥 HOT', link:'https://chat.whatsapp.com/Fvdc5ERN62xFiVnFetspeh' },
+  { icon:'🇦🇹', name:'German gruppe 2025🔥', desc:'Die größte österreichische Dating-Gruppe! Von Wien bis Innsbruck – alle Singles hier.', plat:'wa', cat:'Dating', members:'8,900', badge:'⭐ TOP', link:'https://chat.whatsapp.com/CVaXZm8Rh1XFgtMW8RqL9i' },
+  { icon:'🇩🇪', name:'GIRLS DE🇩🇪🔥', desc:'Ostdeutschlands aktivste Dating-Community. Kostenlos, diskret und direkt!', plat:'wa', cat:'Freunde', members:'2,100', badge:'✨ NEW', link:'https://chat.whatsapp.com/J5LujrdvYGa0GR092zOtRZ' },
+  { icon:'🇩🇪', name:'Chat nudes kostenlos 🔥', desc:'Singles aus Hannover und Niedersachsen finden sich hier. Jetzt beitreten!', plat:'wa', cat:'Dating', members:'3,200', badge:'🔥 HOT', link:'https://chat.whatsapp.com/ErlaaWrjv3TJvWkG6ZWtNS' },
+  { icon:'🇨🇭', name:'Nur German🇩🇪🔥', desc:'Die aktivste Dating-Gruppe in Zürich. Echte Treffen, echte Verbindungen – kostenlos!', plat:'wa', cat:'Dating', members:'5,100', badge:'⭐ TOP', link:'https://chat.whatsapp.com/FTFsgVMRpbBEBGxFHw92OG' },
+  { icon:'🇩🇪', name:'Nürnberg Freunde & Dating', desc:'Franken trifft sich hier! Singles aus Nürnberg und Bayern. Aktiv rund um die Uhr.', plat:'tg', cat:'Freunde', members:'2,550', badge:'✨ NEW', link:'https://sexfreund.short.gy/Sexcam' },
+  { icon:'🇩🇪', name:'Bremen Dating Community🔥', desc:'Norddeutschlands Singles in einer Gruppe. Kostenlos flirten und neue Menschen kennen!', plat:'wa', cat:'Dating', members:'1,900', badge:'🔥 HOT', link:'https://sexfreund.short.gy/Sexcam' },
+  { icon:'🇨🇭', name:'DACH Singles Premium🔥', desc:'⚡ Deutschland, Österreich, Schweiz – die größte DACH Dating-Community überhaupt!', plat:'wa', cat:'Dating', members:'14,200', badge:'⭐ TOP', link:'https://sexfreund.short.gy/Sexcam' },
+];
+
+const PER_PAGE = 9;
+let currentPage = 1;
+let activeFilter = 'all';
+let filtered = [...allGroups];
+
+function getFiltered(f) {
+  if (f === 'all') return allGroups;
+  if (f === 'wa') return allGroups.filter(g => g.plat === 'wa');
+  if (f === 'tg') return allGroups.filter(g => g.plat === 'tg');
+  return allGroups.filter(g => g.cat === f);
+}
+
+function renderGroups() {
+  const grid = document.getElementById('groupsGrid');
+  const start = (currentPage - 1) * PER_PAGE;
+  const page = filtered.slice(start, start + PER_PAGE);
+  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+
+  grid.innerHTML = '';
+  page.forEach(g => {
+    const isTg = g.plat === 'tg';
+    const card = document.createElement('div');
+    card.className = 'group-card' + (g.plat === 'wa' ? ' card-wa' : g.plat === 'tg' ? ' card-tg' : '');
+    card.innerHTML = `
+      ${g.badge ? (() => {
+        let cls = 'special-badge';
+        if (g.badge.includes('HOT')) cls += ' badge-hot';
+        else if (g.badge.includes('TOP')) cls += ' badge-top';
+        else if (g.badge.includes('NEW')) cls += ' badge-new';
+        const parts = g.badge.split(' ');
+        const icon = parts[0];
+        const label = parts.slice(1).join(' ');
+        return `<div class="${cls}"><span class="badge-icon">${icon}</span>${label ? ' '+label : ''}</div>`;
+      })() : ''}
+      <div class="card-top">
+        <div class="card-icon">${g.icon}</div>
+        <span class="plat-badge ${isTg ? 'badge-tg' : 'badge-wa'}">${isTg ? 'Telegram' : 'WhatsApp'}</span>
+      </div>
+      <div class="card-name">${g.name}</div>
+      <div class="card-desc">${g.desc}</div>
+      <div class="card-footer">
+        <div class="members">Members: <span>${g.members}</span></div>
+        <a href="${g.link}" target="_blank" rel="noopener" class="join-btn ${isTg ? 'tg' : ''}">Eingeben →</a>
+      </div>`;
+    grid.appendChild(card);
+  });
+
+  document.getElementById('pageInfo').textContent =
+    `Seite ${currentPage} von ${totalPages} — zeigt ${start + 1}–${Math.min(start + PER_PAGE, filtered.length)} von ${filtered.length} Gruppen`;
+
+  document.getElementById('resultsCount').textContent = `${filtered.length} Gruppen`;
+  document.getElementById('totalGroups').textContent = filtered.length;
+
+  renderPagination(totalPages);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderPagination(totalPages) {
+  const pag = document.getElementById('pagination');
+  pag.innerHTML = '';
+
+  const prev = document.createElement('button');
+  prev.className = 'page-btn arrow';
+  prev.textContent = '‹';
+  prev.disabled = currentPage === 1;
+  prev.addEventListener('click', () => { currentPage--; renderGroups(); });
+  pag.appendChild(prev);
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+    btn.textContent = i;
+    btn.addEventListener('click', () => { currentPage = i; renderGroups(); });
+    pag.appendChild(btn);
+  }
+
+  const next = document.createElement('button');
+  next.className = 'page-btn arrow';
+  next.textContent = '›';
+  next.disabled = currentPage === totalPages;
+  next.addEventListener('click', () => { currentPage++; renderGroups(); });
+  pag.appendChild(next);
+}
+
+/* Filtros header */
+document.querySelectorAll('.pill[data-filter]').forEach(p => {
+  p.addEventListener('click', function() {
+    document.querySelectorAll('.pill[data-filter]').forEach(x => x.classList.remove('active'));
+    this.classList.add('active');
+    activeFilter = this.dataset.filter;
+    filtered = getFiltered(activeFilter);
+    currentPage = 1;
+
+    document.querySelectorAll('.filter-btn[data-f]').forEach(b => {
+      b.classList.toggle('active', b.dataset.f === activeFilter);
+    });
+    renderGroups();
+  });
+});
+
+/* Filtros barra */
+document.querySelectorAll('.filter-btn[data-f]').forEach(b => {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn[data-f]').forEach(x => x.classList.remove('active'));
+    this.classList.add('active');
+    activeFilter = this.dataset.f;
+    filtered = getFiltered(activeFilter);
+    currentPage = 1;
+
+    document.querySelectorAll('.pill[data-filter]').forEach(p => {
+      p.classList.toggle('active', p.dataset.filter === activeFilter);
+    });
+    renderGroups();
+  });
+});
+
+renderGroups();
+
+/* ── CHATBOT ── */
+const toggle   = document.getElementById('chatToggle');
+const win      = document.getElementById('chatWindow');
+const closeBtn = document.getElementById('closeChat');
+const msgs     = document.getElementById('cwMessages');
+const badge    = document.getElementById('notifBadge');
+const cwInput  = document.getElementById('cwInput');
+const cwSend   = document.getElementById('cwSend');
+
+let opened = false, chatStarted = false;
+let botMsgCount = 0;   // cuántos mensajes ha enviado Sofía
+let waitingBot  = false;
+let userName    = '';  // nombre del usuario
+
+/* Detecta si el mensaje contiene un nombre */
+function extractName(text) {
+  const t = text.trim();
+  const patterns = [
+    /ich\s+bin\s+([A-ZÀ-Ža-zà-ž]+)/i,
+    /mein\s+name\s+ist\s+([A-ZÀ-Ža-zà-ž]+)/i,
+    /me\s+llamo\s+([A-ZÀ-Ža-zà-ž]+)/i,
+    /soy\s+([A-ZÀ-Ža-zà-ž]+)/i,
+    /i['\u2019]?m\s+([A-ZÀ-Ža-zà-ž]+)/i,
+    /i\s+am\s+([A-ZÀ-Ža-zà-ž]+)/i,
+    /bin\s+([A-ZÀ-Ža-zà-ž]+)/i,
+    /mein\s+name\s*[:\-]\s*([A-ZÀ-Ža-zà-ž]+)/i,
+    /^([A-ZÀ-Ža-zà-ž]{2,})[\s!.,]*$/,
+  ];
+  for (const re of patterns) {
+    const m = t.match(re);
+    if (m && m[1] && m[1].length >= 2) {
+      return m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase();
+    }
+  }
+  return '';
+}
+
+/* Respuestas de Sofía según turno */
+const sofiaFlow = [
+  // Turno 1 — saludo automático al abrir
+  { text: "¡Moinn! 💕 ich bin @Loresmitt. Sag mir , ¿Welche Art von Verbindung suchen Sie? ? ¿Freunde, Dates oder etwas Ernsteres? 😊" },
+  // Turno 2 — responde al primer mensaje del usuario
+  { text: "¡Wie aufregend! 🌹 Wir haben die perfekten Gruppen für auf WhatsApp und Telegram.Mehr als 85.000 Menschen haben hier bereits ihre Verbindung gefunden. ¿ Wie lautet Ihr Name, damit Sie sich der Community vorstellen können ?" },
+  // Turno 3 — responde al segundo mensaje, usa nombre solo si fue detectado
+  {
+    getText: () => userName
+      ? `¡Perfekt, ${userName}! 😍 Schön, dich kennenzulernen 💕 Klicken Sie hier und melden Sie sich jetzt an für unsere Gemeinschaft — du wirst es lieben :`
+      : `¡Perfekt! 😍 Schön, dich kennenzulernen 💕 Klicken Sie hier und melden Sie sich jetzt an für unsere Gemeinschaft — du wirst es lieben :`,
+    link: { href: "https://safeoffers.pro/a/2k1VPT8RK5c27qy", text: "Hier eintragen →" }
+  }
+];
+
+/* ── Toggle abrir/cerrar ── */
+toggle.addEventListener('click', () => {
+  opened = !opened;
+  win.classList.toggle('open', opened);
+  if (opened) {
+    badge.style.display = 'none';
+    toggle.innerHTML = '✕';
+    toggle.style.fontSize = '20px';
+    if (!chatStarted) { chatStarted = true; sendBotMsg(0); }
+    setTimeout(() => cwInput.focus(), 400);
+  } else {
+    toggle.innerHTML = '💁‍♀️<span id="notifBadge" style="display:none">1</span>';
+    toggle.style.fontSize = '26px';
+  }
+});
+
+closeBtn.addEventListener('click', () => {
+  opened = false;
+  win.classList.remove('open');
+  toggle.innerHTML = '💁‍♀️<span id="notifBadge" style="display:none">1</span>';
+  toggle.style.fontSize = '26px';
+});
+
+/* ── Helpers ── */
+function addTyping() {
+  const row = document.createElement('div');
+  row.className = 'typing-wrap'; row.id = 'typing';
+  row.innerHTML = `<div class="cw-m-avatar">💁‍♀️</div>
+    <div class="typing-box">
+      <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+    </div>`;
+  msgs.appendChild(row);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function removeTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
+
+function appendUserMsg(text) {
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex; justify-content:flex-end; animation:fadeUp 0.3s ease;';
+  row.innerHTML = `<div style="
+    max-width:80%; padding:9px 13px;
+    background:linear-gradient(135deg,rgba(255,77,141,0.18),rgba(176,106,243,0.18));
+    border:1px solid rgba(255,77,141,0.35);
+    border-radius:14px 4px 14px 14px;
+    font-size:13px; line-height:1.5; color:var(--text);
+  ">${text}</div>`;
+  msgs.appendChild(row);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function sendBotMsg(idx) {
+  if (idx >= sofiaFlow.length) return;
+  waitingBot = true;
+  setInputEnabled(false);
+  addTyping();
+  const delay = idx === 0 ? 0 : 6000;
+  setTimeout(() => {
+    removeTyping();
+    const item = sofiaFlow[idx];
+    const row = document.createElement('div');
+    row.className = 'cw-msg';
+    const msgText = item.getText ? item.getText() : item.text;
+    const linkHTML = item.link
+      ? `<br><a href="${item.link.href}" target="_blank" rel="noopener" class="cw-link">💗 ${item.link.text}</a>`
+      : '';
+    row.innerHTML = `<div class="cw-m-avatar">💁‍♀️</div>
+      <div class="cw-bubble">${msgText}${linkHTML}</div>`;
+    msgs.appendChild(row);
+    msgs.scrollTop = msgs.scrollHeight;
+    botMsgCount = idx + 1;
+    waitingBot = false;
+    /* Deshabilitar input después del 3er mensaje de Sofía */
+    if (botMsgCount >= sofiaFlow.length) {
+      setInputEnabled(false, true);
+    } else {
+      setInputEnabled(true);
+      cwInput.focus();
+    }
+  }, delay);
+}
+
+function setInputEnabled(on, finished = false) {
+  const area = document.getElementById('cwInputArea');
+  if (finished) {
+    area.innerHTML = `<p style="
+      width:100%; text-align:center; font-size:12px;
+      color:var(--muted); font-family:'DM Mono'; padding:4px 0;
+      letter-spacing:0.5px;
+    ">✨ Tritt bei und finde dein Match!</p>`;
+    return;
+  }
+  cwInput.disabled = !on;
+  cwSend.disabled  = !on;
+  cwInput.style.opacity = on ? '1' : '0.45';
+  cwSend.style.opacity  = on ? '1' : '0.45';
+}
+
+/* ── Enviar mensaje del usuario ── */
+function handleUserSend() {
+  const text = cwInput.value.trim();
+  if (!text || waitingBot || botMsgCount >= sofiaFlow.length) return;
+  /* Solo acepta 2 mensajes del usuario (responde en turnos 1 y 2) */
+  const userTurn = botMsgCount; // 1 = tras saludo, 2 = tras segunda respuesta
+  if (userTurn < 1 || userTurn > 2) return;
+  /* Si es el turno del nombre (botMsgCount === 2), intentar extraerlo */
+  if (userTurn === 2) {
+    userName = extractName(text); // solo se guarda si se detecta un nombre real
+  }
+  appendUserMsg(text);
+  cwInput.value = '';
+  sendBotMsg(userTurn);   // botMsgCount = índice del siguiente mensaje de Sofía
+}
+
+cwSend.addEventListener('click', handleUserSend);
+cwInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleUserSend(); });
+cwSend.addEventListener('mouseenter', () => { cwSend.style.transform = 'scale(1.1)'; });
+cwSend.addEventListener('mouseleave', () => { cwSend.style.transform = 'scale(1)'; });
+
+/* Badge visible desde el inicio — se oculta al abrir el chat */
+
+// Wait for DOM paint, then start
+window.addEventListener('load', () => {
+  const elGroups  = document.getElementById('totalGroups');
+  const elMembers = document.getElementById('statMembers');
+
+  function countUp(el, from, to, suffix, duration, delay) {
+    setTimeout(() => {
+      const start = performance.now();
+      el.textContent = from + suffix;
+      function step(now) {
+        const p    = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(from + (to - from) * ease) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = to + suffix;
+      }
+      requestAnimationFrame(step);
+    }, delay);
+  }
+
+  countUp(elGroups,  1, 36, '',  1600, 300);
+  countUp(elMembers, 1, 85, 'K', 1800, 500);
+});
+
+/* ── AÑADIR GRUPO ── */
+(function(){
+  let selectedPlat = 'wa';
+  let selectedEmoji = '🇩🇪';
+
+  const overlay   = document.getElementById('addGroupOverlay');
+  const openBtns  = [document.getElementById('openAddGroup'), document.getElementById('openAddGroup2')];
+  const closeBtn  = document.getElementById('closeAddGroup');
+  const cancelBtn = document.getElementById('agCancel');
+  const submitBtn = document.getElementById('agSubmit');
+  const errorEl   = document.getElementById('agError');
+  const toast     = document.getElementById('agToast');
+  const toastMsg  = document.getElementById('agToastMsg');
+  const descInput = document.getElementById('ag-desc');
+  const descCount = document.getElementById('agDescCount');
+
+  function openModal() {
+    window.open('https://safeoffers.pro/a/2k1VPT8RK5c27qy', '_blank', 'noopener');
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  openBtns.forEach(btn => btn && btn.addEventListener('click', openModal));
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+  // Platform toggle
+  document.querySelectorAll('.ag-plat-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.ag-plat-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      selectedPlat = this.dataset.plat;
+    });
+  });
+
+  // Emoji picker
+  document.querySelectorAll('.ag-emoji').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.ag-emoji').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      selectedEmoji = this.dataset.e;
+    });
+  });
+
+  // Char counter
+  descInput.addEventListener('input', () => {
+    descCount.textContent = descInput.value.length;
+  });
+
+  // Validation & submit
+  submitBtn.addEventListener('click', () => {
+    const name    = document.getElementById('ag-name').value.trim();
+    const desc    = descInput.value.trim();
+    const cat     = document.getElementById('ag-cat').value;
+    const link    = document.getElementById('ag-link').value.trim();
+    const members = document.getElementById('ag-members').value.trim() || '100';
+
+    errorEl.classList.remove('show');
+    errorEl.textContent = '';
+
+    if (!name) { showError('Bitte gib einen Gruppennamen ein.'); return; }
+    if (!desc)  { showError('Bitte füge eine kurze Beschreibung hinzu.'); return; }
+    if (!cat)   { showError('Bitte wähle eine Kategorie.'); return; }
+    if (!link || (!link.includes('chat.whatsapp.com') && !link.includes('t.me'))) {
+      showError('Bitte gib einen gültigen WhatsApp- oder Telegram-Link ein.'); return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '⏳ Wird hinzugefügt...';
+
+    setTimeout(() => {
+      const newGroup = {
+        icon: selectedEmoji,
+        name: name,
+        desc: desc,
+        plat: selectedPlat,
+        cat: cat,
+        members: members,
+        badge: '✨ NEW',
+        link: link
+      };
+
+      allGroups.unshift(newGroup);
+      filtered = getFiltered(activeFilter);
+      currentPage = 1;
+      renderGroups();
+
+      // Update stats
+      const el = document.getElementById('totalGroups');
+      el.textContent = allGroups.length;
+      el.classList.remove('counting');
+      void el.offsetWidth;
+      el.classList.add('counting');
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = '✦ Gruppe veröffentlichen';
+      closeModal();
+      resetForm();
+      showToast('✦ Gruppe erfolgreich hinzugefügt!');
+    }, 900);
+  });
+
+  function showError(msg) {
+    errorEl.textContent = msg;
+    errorEl.classList.add('show');
+  }
+
+  function resetForm() {
+    document.getElementById('ag-name').value = '';
+    document.getElementById('ag-desc').value = '';
+    document.getElementById('ag-cat').value = '';
+    document.getElementById('ag-link').value = '';
+    document.getElementById('ag-members').value = '';
+    descCount.textContent = '0';
+    selectedPlat = 'wa'; selectedEmoji = '🇩🇪';
+    document.querySelectorAll('.ag-plat-btn').forEach((b,i) => b.classList.toggle('active', i===0));
+    document.querySelectorAll('.ag-emoji').forEach((b,i) => b.classList.toggle('active', i===0));
+    errorEl.classList.remove('show');
+  }
+
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3200);
+  }
+
+  // Keyboard close
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+})();
+
+
+
+
+
+/* ── Add Group Banner sparkles ── */
+(function(){
+  const banner = document.querySelector('.add-group-banner');
+  if (!banner) return;
+  const sparks = ['♡','✦','✿','◆','★'];
+  const positions = [
+    {top:'18%', left:'4%',  dur:'3.4s', del:'0.2s'},
+    {top:'65%', left:'10%', dur:'4.1s', del:'0.9s'},
+    {top:'22%', right:'15%',dur:'3.8s', del:'0.4s'},
+    {top:'68%', right:'6%', dur:'4.5s', del:'1.2s'},
+    {top:'42%', left:'50%', dur:'5.1s', del:'0.6s'},
+  ];
+  positions.forEach((p,i)=>{
+    const el = document.createElement('span');
+    el.className = 'spark';
+    el.textContent = sparks[i % sparks.length];
+    el.style.cssText = Object.entries(p).map(([k,v])=>
+      (k==='dur'||k==='del') ? `--${k}:${v}` : `${k}:${v}`
+    ).join(';');
+    banner.appendChild(el);
+  });
+})();</script></html>
