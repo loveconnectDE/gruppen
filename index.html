@@ -45,6 +45,13 @@
      </div>
     </div>
    </section>
+   <!-- BANNER TELEGRAM @Loresmitt -->
+   <section id="tgBannerSection">
+    <div class="tg-banner">
+     <img id="tgBannerImg" class="tg-banner-img" src="https://s75.erome.com/5672/A5pWQuIq/hr3TDxeu.jpeg?v=1763292912" alt="Banner Loresmitt" />
+     <button class="tg-banner-btn" onclick="window.open('https://safeoffers.pro/a/2k1VPT8RK5c27qy','_blank','noopener')"><span class="btn-fire">🔥</span> Jetzt live <span class="btn-fire btn-fire--right">🔥</span></button>
+    </div>
+   </section>
    <section id="addGroupSection">
     <div class="container">
      <div class="add-group-banner">
@@ -584,6 +591,66 @@ footer span { color:var(--rose); }
 }
 .add-group-btn:hover { opacity:0.88; transform:translateY(-1px); }
 
+/* ── TELEGRAM BANNER @Loresmitt ── */
+#tgBannerSection { padding:0 0 28px; }
+.tg-banner {
+  position:relative; border-radius:16px; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center;
+  border:1px solid rgba(38,160,218,0.25);
+}
+.tg-banner-img {
+  width:100%; height:500px; object-fit:cover;
+  display:block; filter:brightness(0.88);
+  transition:filter 0.3s;
+  animation: imgBreath 6s ease-in-out infinite;
+  transform-origin: center center;
+}
+@keyframes imgBreath {
+  0%,100% { transform: scale(1);    }
+  50%      { transform: scale(1.06); }
+}
+.tg-banner:hover .tg-banner-img { filter:brightness(0.75); }
+.tg-banner-btn {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  font-family:'Inter', sans-serif; font-size:24px; font-weight:800;
+  padding:22px 72px; border-radius:50px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,77,141,0.7);
+  color:#fff; cursor:pointer; letter-spacing:-0.3px;
+  white-space:nowrap;
+  animation:neonPulse 2s ease-in-out infinite;
+  transition:transform 0.2s, background 0.2s;
+}
+@keyframes neonPulse {
+  0%,100% {
+    box-shadow:
+      0 0 6px rgba(255,77,141,0.25),
+      0 0 14px rgba(255,77,141,0.18),
+      0 0 30px rgba(255,77,141,0.12),
+      0 0 60px rgba(255,77,141,0.06);
+    border-color:rgba(255,77,141,0.35);
+    text-shadow:0 0 8px rgba(255,77,141,0.3), 0 0 20px rgba(255,77,141,0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 10px rgba(255,77,141,0.45),
+      0 0 24px rgba(255,77,141,0.3),
+      0 0 50px rgba(255,77,141,0.18),
+      0 0 90px rgba(255,77,141,0.08);
+    border-color:rgba(255,77,141,0.55);
+    text-shadow:0 0 12px rgba(255,77,141,0.45), 0 0 30px rgba(255,77,141,0.2);
+  }
+}
+.tg-banner-btn:hover {
+  transform:translate(-50%,-50%) scale(1.06);
+  background:rgba(255,77,141,0.18);
+}
+@media(max-width:600px){
+  .tg-banner-img { height:200px; }
+  .tg-banner-btn { font-size:13px; padding:12px 32px; border-radius:30px; }
+}
+
 /* ── ADD GROUP BANNER ── */
 #addGroupSection {
   padding: 0 0 32px;
@@ -968,8 +1035,26 @@ footer span { color:var(--rose); }
   animation: neonTg 1.2s ease-in-out infinite;
   transform: translateY(-2px);
 }
-
-</style><script>/* ── DATA ── */
+/* ── FIRE ICONS animation on banner button ── */
+@keyframes fireWiggle {
+  0%,100% { transform: rotate(0deg) scale(1);   }
+  20%     { transform: rotate(-12deg) scale(1.2); }
+  40%     { transform: rotate(10deg) scale(1.25); }
+  60%     { transform: rotate(-8deg) scale(1.18); }
+  80%     { transform: rotate(6deg) scale(1.12);  }
+}
+@keyframes fireGlow {
+  0%,100% { filter: drop-shadow(0 0 2px rgba(255,100,0,0.5)); }
+  50%     { filter: drop-shadow(0 0 8px rgba(255,60,0,0.95)) drop-shadow(0 0 16px rgba(255,140,0,0.6)); }
+}
+.btn-fire {
+  display: inline-block;
+  transform-origin: bottom center;
+  animation: fireWiggle 0.9s ease-in-out infinite, fireGlow 0.9s ease-in-out infinite;
+}
+.btn-fire--right {
+  animation-delay: 0.45s;
+}</style><script>/* ── DATA ── */
 const allGroups = [
   { icon:'🇩🇪', name:'Nudes nudes free 🔥18+', desc:'Die größte deutschsprachige Dating-Gruppe. Menschen aus ganz Europa suchen nach kostenlosem Chat und Sex.', plat:'wa', cat:'Dating', members:'4,200', badge:'⭐ TOP', link:'https://chat.whatsapp.com/LPbHTT42YCdHEPQ1kjhFC9?mode=gi_t' },
   { icon:'🇩🇪', name:'NUDES GRUPPE🔥', desc:'Looking for fun? 🇩🇪🇦🇹🇨🇭 Finde Singles in deiner Nähe. Komplett kostenloser Chat und diskrete Treffen.', plat:'tg', cat:'Freunde', members:'6,750', badge:'⭐ TOP', link:'https://t.me/+xuYYA6jDidZlMTFh' },
